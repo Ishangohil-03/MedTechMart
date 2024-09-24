@@ -1,22 +1,15 @@
 import React from 'react';
+import RootStackNavigator from './src/screens/navigation/rootStack'; // Ensure the correct path to RootStack
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './src/screens/homeScreen';
-import ProductDetailScreen from './src/screens/productDetails';
-import { enableScreens } from 'react-native-screens';
-
-enableScreens();
-const Stack = createNativeStackNavigator();
+import AuthStack from './src/screens/navigation/authStack';
 
 const App: React.FC = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="ProductDetail" component={ProductDetailScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  // return <RootStackNavigator />;
+  return(
+  <NavigationContainer>
+  <AuthStack />
+</NavigationContainer>
+  )
 };
 
 export default App;
