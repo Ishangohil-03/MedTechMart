@@ -1,53 +1,27 @@
-// src/components/pages/LoginScreen.tsx
+// src/components/auth/LoginScreen.tsx
 
 import React, { useState } from 'react';
-import { ScrollView, StyleSheet, Alert } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import LoginForm from '../../components/organisms/LoginForm';
-import Button from '../../components/atoms/Buttons';
-import { loginUser } from '../../utils/api';
-import { AuthStackParamList } from '../../navigation/AuthStack';
+import { View, Button, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { COLORS, SIZES } from '../../components/atoms/Theme'; // Import from theme.tsx
-import Loader from '../../components/atoms/Loader'; // If using Loader
+import LoginForm from '../../components/organisms/LoginForm';
+import { loginUser } from '../../utils/api';
 
-type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
+const LoginScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  // State for form fields
-  const [username, setUsername] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [isLoading, setIsLoading] = useState<boolean>(false); // For loader
-
-  // Handle form submission
   const handleLogin = async () => {
-    // Validate required fields
-    if (!username || !password) {
-      Alert.alert('Error', 'Please fill in all required fields.');
-      return;
-    }
-
-    setIsLoading(true); // Show loader
-
     try {
       const data = await loginUser(username, password);
-      Alert.alert('Success', 'Login successful!');
-      // Store token securely (consider using a more secure storage solution)
-      await AsyncStorage.setItem('token', data.token);
-      navigation.navigate('Home'); // Navigate to the main app screen
-    } catch (error: any) {
-      console.error('Error logging in:', error);
-      Alert.alert(
-        'Error',
-        error.response?.data?.message || 'Failed to login. Please try again.'
-      );
-    } finally {
-      setIsLoading(false); // Hide loader
+      await AsyncStorage.setItem('token', data.token);  // Store the token
+      navigation.navigate('Home');  // After login, navigate to the Home screen
+    } catch (error) {
+      Alert.alert('Login failed', 'Please check your credentials and try again.');
     }
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <View style={styles.container}>
       <LoginForm
         username={username}
         setUsername={setUsername}
@@ -55,23 +29,15 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         setPassword={setPassword}
       />
       <Button title="Login" onPress={handleLogin} />
-      <Button
-        title="Register"
-        onPress={() => navigation.navigate('Register')}
-        backgroundColor="#AAAAAA"
-        textColor={COLORS.txt}
-      />
-      {isLoading && <Loader />} {/* Show loader when isLoading is true */}
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: SIZES.padding,
+    flex: 1,
     justifyContent: 'center',
-    backgroundColor: COLORS.background,
+    padding: 16,
   },
 });
 

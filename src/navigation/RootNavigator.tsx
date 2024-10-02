@@ -1,4 +1,4 @@
-// src/navigation/index.ts
+// src/navigation/RootNavigator.tsx
 
 import React, { useEffect, useState } from 'react';
 import AuthStack from './AuthStack';
@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RootNavigator: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);  // Loading indicator while checking login status
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -26,7 +26,7 @@ const RootNavigator: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return null;  // You can show a splash screen or loader here
+    return null;  // You can add a loading screen or splash screen here
   }
 
   return isLoggedIn ? <MainStack /> : <AuthStack />;

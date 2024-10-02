@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from '../screens/home/HomeScreen';  // Home Screen component
+import HomeScreen from '../screens/home/HomeScreen';  // Adjust import path
 
 export type MainStackParamList = {
   Home: undefined;
@@ -14,6 +14,7 @@ const MainStack: React.FC = () => {
   return (
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Home' }} />
+      {/* Add more screens here as needed */}
     </Stack.Navigator>
   );
 };

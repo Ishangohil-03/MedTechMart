@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import RootNavigator from './src/navigation';
+import RootNavigator from './src/navigation/RootNavigator';  // Adjust import path
 
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <RootNavigator />  {/* Load the root navigator */}
+      <RootNavigator />
     </NavigationContainer>
   );
 };

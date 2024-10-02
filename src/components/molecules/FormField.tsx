@@ -13,7 +13,7 @@ interface FormFieldProps {
   placeholder: string;
   secureTextEntry?: boolean;
   keyboardType?: TextInputProps['keyboardType'];
-  error?: string; // New prop for error messages
+  // error?: string; // New prop for error messages
 }
 
 const FormField: React.FC<FormFieldProps> = ({
@@ -23,7 +23,7 @@ const FormField: React.FC<FormFieldProps> = ({
   placeholder,
   secureTextEntry = false,
   keyboardType = 'default',
-  error
+  // error
 }) => {
   return (
     <View style={styles.container}>
@@ -35,7 +35,7 @@ const FormField: React.FC<FormFieldProps> = ({
         secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
       />
-      {error && <Text style={styles.errorText}>{error}</Text>}
+      {/* {error && <Text style={styles.errorText}>{error}</Text>} */}
     </View>
   );
 };
