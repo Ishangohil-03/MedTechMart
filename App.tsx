@@ -1,15 +1,15 @@
+// src/App.tsx
+
 import React from 'react';
-import RootStackNavigator from './src/screens/navigation/rootStack'; // Ensure the correct path to RootStack
 import { NavigationContainer } from '@react-navigation/native';
-import AuthStack from './src/screens/navigation/authStack';
+import RootNavigator from './src/navigation';
 
 const App: React.FC = () => {
-  // return <RootStackNavigator />;
-  return(
-  <NavigationContainer>
-  <AuthStack />
-</NavigationContainer>
-  )
+  return (
+    <NavigationContainer>
+      <RootNavigator />  {/* Load the root navigator */}
+    </NavigationContainer>
+  );
 };
 
 export default App;
